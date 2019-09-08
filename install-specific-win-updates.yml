@@ -1,0 +1,17 @@
+---
+# Ansible playbook to run Windows Update and restart, if required
+#
+# http://docs.ansible.com/ansible/win_updates_module.html
+# https://docs.ansible.com/ansible/win_reboot_module.html
+
+- name:  Windows Update
+  hosts: win
+  gather_facts: false
+  tasks:
+    - name: Install specific updates based on the KBs for those updates
+      win_updates:
+          category_name: SecurityUpdates
+          whitelist:
+          - KB4073819
+          - KB4074228
+          log_path: c:\temp\ansible_install_specific_win_updates.txt

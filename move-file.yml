@@ -1,0 +1,5 @@
+- name: another raw module example demonstrating powershell one liner
+  hosts: win
+  tasks:
+     - name: Move file on remote Windows Server from one location to another
+       win_command: Powershell.exe "Move-Item C:\temp\2del.txt C:\temp1\smtp.conf"

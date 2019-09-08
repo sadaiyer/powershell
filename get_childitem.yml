@@ -1,0 +1,5 @@
+- name: test script module
+  hosts: win
+  tasks:
+    - name: run test script
+      script: get_childitem.ps1

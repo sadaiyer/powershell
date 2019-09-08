@@ -1,0 +1,14 @@
+#https://www.ansible.com/blog/windows-updates-and-ansible
+- name: Run Updates on Directory Servers then wait 15 mins
+  hosts: directoryservers
+  connection: winrm
+
+  tasks:
+    win_updates:
+      category_names:
+        - CriticalUpdates
+        - SecurityUpdates
+      blacklist:
+        - Microsoft Silverlight
+    reboot: yes
+    reboot_timeout: 900

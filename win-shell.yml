@@ -1,0 +1,8 @@
+- name: another raw module example demonstrating powershell one liner
+  hosts: win
+  tasks:
+     - name: Execute a command in the remote shell; stdout goes to the specified file on the remote.
+       win_shell: C:\Users\vagrant\Downloads\test.ps1 >> c:\somelog.txt
+       
+     #- name: Change the working directory to somedir/ before executing the command, the chdir corrupts the vagrant name below, so commmenting
+       #win_shell: C:\test.ps1 >> c:\somelog.txt chdir=C:\Users\vagrant\Downloads\

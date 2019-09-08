@@ -1,0 +1,6 @@
+- name: another raw module example demonstrating powershell one liner
+  hosts: win
+  tasks:
+     - name: whoami
+       win_command: whoami
+       register: whoami_out
