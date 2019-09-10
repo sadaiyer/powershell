@@ -1,0 +1,9 @@
+#https://docs.ansible.com/ansible/latest/modules/win_partition_module.html#examples
+- name: Create a partition with drive letter D and size 50 MiB
+  hosts: win
+  tasks:
+    - name: Create a partition with drive letter D and size 50 MiB
+      win_partition:
+          drive_letter: D
+          partition_size: 100 MiB
+          disk_number: 1

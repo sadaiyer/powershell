@@ -1,0 +1,22 @@
+#https://docs.ansible.com/ansible/latest/user_guide/windows_usage.html
+- name: Ensure 7-Zip is installed via Chocolatey
+  hosts: win
+  tasks:
+        # Install/uninstall with win_command
+        - name: Download the 7-Zip package
+          win_get_url:
+                url: https://www.7-zip.org/a/7z1701-x64.msi
+                dest: C:\temp\7z.msi
+
+        - name: Check if 7-Zip is already installed
+          win_reg_stat:
+              name: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{89F4137D-6C26-4A84-BDB8-2E5A4BB71E00}
+          register: 7zip_installed
+
+        - name: Ensure 7-Zip is installed via win_command
+          win_command: C:\Windows\System32\msiexec.exe /i C:\temp\7z.msi /qn /norestart
+          when: 7zip_installed.exists == false
+
+        - name: Ensure 7-Zip is uninstalled via win_command
+          win_command: C:\Windows\System32\msiexec.exe /x {23170F69-40C1-2702-1701-000001000000} /qn /norestart
+          when: 7zip_installed.exists == true
